@@ -1,0 +1,63 @@
+2022-04-24 16:17:26 __main__     INFO     start main
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 __main__     INFO     Order{uuid: 88bc87ee-4292-41c1-9f60-1f21816fcc2e,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 12}
+2022-04-24 16:17:26 __main__     INFO     Order{uuid: 336569db-a7e5-4a07-bffe-533bd8a24780,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 13}
+2022-04-24 16:17:26 __main__     INFO     Order{uuid: 0e39268a-b4b0-43ef-b3e0-7fa88db326f9,trader id: 11377704-0c41-4bf4-a409-87d17012c795,self.ticker: GOOGLE,side: SideOrder.BUY,price: 15}
+2022-04-24 16:17:26 __main__     INFO     Order{uuid: 70d75262-d610-4b98-9f69-e068dccba356,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 10}
+2022-04-24 16:17:26 __main__     INFO     Order{uuid: 34c597ac-fe72-4d39-ae29-90557b0772bb,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}
+2022-04-24 16:17:26 __main__     INFO     Order{uuid: fee3ee3f-dec0-4c16-8782-3039fb07bb1e,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}
+2022-04-24 16:17:26 __main__     INFO     Start Inserting Orders to Market
+2022-04-24 16:17:26 __main__     INFO     init order Order{uuid: 88bc87ee-4292-41c1-9f60-1f21816fcc2e,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 12}
+2022-04-24 16:17:26 __main__     INFO     Sending limit order and update trader created
+2022-04-24 16:17:26 __main__     INFO     Finding trader for order id 88bc87ee-4292-41c1-9f60-1f21816fcc2e
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     init order Order{uuid: 336569db-a7e5-4a07-bffe-533bd8a24780,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 13}
+2022-04-24 16:17:26 __main__     INFO     Sending limit order and update trader created
+2022-04-24 16:17:26 __main__     INFO     Finding trader for order id 336569db-a7e5-4a07-bffe-533bd8a24780
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     init order Order{uuid: 0e39268a-b4b0-43ef-b3e0-7fa88db326f9,trader id: 11377704-0c41-4bf4-a409-87d17012c795,self.ticker: GOOGLE,side: SideOrder.BUY,price: 15}
+2022-04-24 16:17:26 __main__     INFO     Sending limit order and update trader created
+2022-04-24 16:17:26 __main__     INFO     Finding trader for order id 0e39268a-b4b0-43ef-b3e0-7fa88db326f9
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     init order Order{uuid: 70d75262-d610-4b98-9f69-e068dccba356,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 10}
+2022-04-24 16:17:26 __main__     INFO     Sending limit order and update trader created
+2022-04-24 16:17:26 __main__     INFO     Finding trader for order id 70d75262-d610-4b98-9f69-e068dccba356
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     init order Order{uuid: 34c597ac-fe72-4d39-ae29-90557b0772bb,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}
+2022-04-24 16:17:26 __main__     INFO     Sending limit order and update trader created
+2022-04-24 16:17:26 __main__     INFO     Finding trader for order id 34c597ac-fe72-4d39-ae29-90557b0772bb
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     init order Order{uuid: fee3ee3f-dec0-4c16-8782-3039fb07bb1e,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}
+2022-04-24 16:17:26 __main__     INFO     Sending limit order and update trader created
+2022-04-24 16:17:26 __main__     INFO     Finding trader for order id fee3ee3f-dec0-4c16-8782-3039fb07bb1e
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     Inserting new order
+2022-04-24 16:17:26 trader       INFO     Creating order for ticker GOOGLE
+2022-04-24 16:17:26 trader       INFO     Order opened in the market with success
+2022-04-24 16:17:26 __main__     INFO     Order created in the market Ok
+2022-04-24 16:17:26 market       INFO     Update aggregations
+2022-04-24 16:17:26 market       INFO     current orders [Order{uuid: 0e39268a-b4b0-43ef-b3e0-7fa88db326f9,trader id: 11377704-0c41-4bf4-a409-87d17012c795,self.ticker: GOOGLE,side: SideOrder.BUY,price: 15}, Order{uuid: 336569db-a7e5-4a07-bffe-533bd8a24780,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 13}, Order{uuid: 88bc87ee-4292-41c1-9f60-1f21816fcc2e,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 12}, Order{uuid: 70d75262-d610-4b98-9f69-e068dccba356,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 10}, Order{uuid: 34c597ac-fe72-4d39-ae29-90557b0772bb,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}, Order{uuid: fee3ee3f-dec0-4c16-8782-3039fb07bb1e,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}, Order{uuid: f95788a8-96b4-4529-98ae-ba3a75b25bbf,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 5}]
+2022-04-24 16:17:26 market       INFO     current orders []
+2022-04-24 16:17:26 market       INFO     Update aggregations
+2022-04-24 16:17:26 market       INFO     current orders [Order{uuid: 0e39268a-b4b0-43ef-b3e0-7fa88db326f9,trader id: 11377704-0c41-4bf4-a409-87d17012c795,self.ticker: GOOGLE,side: SideOrder.BUY,price: 15}, Order{uuid: 336569db-a7e5-4a07-bffe-533bd8a24780,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 13}, Order{uuid: 88bc87ee-4292-41c1-9f60-1f21816fcc2e,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 12}, Order{uuid: 70d75262-d610-4b98-9f69-e068dccba356,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 10}, Order{uuid: 34c597ac-fe72-4d39-ae29-90557b0772bb,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}, Order{uuid: fee3ee3f-dec0-4c16-8782-3039fb07bb1e,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}, Order{uuid: f95788a8-96b4-4529-98ae-ba3a75b25bbf,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 5}]
+2022-04-24 16:17:26 market       INFO     current orders []
+2022-04-24 16:17:26 __main__     INFO     # Buy Orders  Vol   Ask   | Bid   Vol   # Sell Orders 
+
+2022-04-24 16:17:26 market       INFO     Update aggregations
+2022-04-24 16:17:26 market       INFO     current orders [Order{uuid: 0e39268a-b4b0-43ef-b3e0-7fa88db326f9,trader id: 11377704-0c41-4bf4-a409-87d17012c795,self.ticker: GOOGLE,side: SideOrder.BUY,price: 15}, Order{uuid: 336569db-a7e5-4a07-bffe-533bd8a24780,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 13}, Order{uuid: 88bc87ee-4292-41c1-9f60-1f21816fcc2e,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 12}, Order{uuid: 70d75262-d610-4b98-9f69-e068dccba356,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 10}, Order{uuid: 34c597ac-fe72-4d39-ae29-90557b0772bb,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}, Order{uuid: fee3ee3f-dec0-4c16-8782-3039fb07bb1e,trader id: 3a738177-3eb4-42fe-902f-22da2d45002f,self.ticker: GOOGLE,side: SideOrder.BUY,price: 9}, Order{uuid: f95788a8-96b4-4529-98ae-ba3a75b25bbf,trader id: f5f9332a-39c2-466d-98bc-0b36112cd677,self.ticker: GOOGLE,side: SideOrder.BUY,price: 5}]
+2022-04-24 16:17:26 market       INFO     current orders []
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 3a738177-3eb4-42fe-902f-22da2d45002f,money: 1000000,money_hold:       7300 , # created orders: 0, # open orders: 3}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: f5f9332a-39c2-466d-98bc-0b36112cd677,money: 1000000,money_hold:      10600 , # created orders: 0, # open orders: 3}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 11377704-0c41-4bf4-a409-87d17012c795,money: 1000000,money_hold:      15000 , # created orders: 0, # open orders: 1}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 98cd1113-9abb-469d-bde7-e3744dbd5bd4,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 8f7a0671-6b07-464d-9434-ab5c374e7cee,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: c7b65275-1502-4d43-8768-61f57d338882,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: b798d180-5fe7-4f1a-94b2-38959a8fca2b,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 4245efee-74e3-4f93-97c2-77cf766c450f,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 29a7cdab-9fbd-4600-aa0d-63f62200cc7e,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
+2022-04-24 16:17:26 __main__     INFO     Trader{id: 64fd4fbb-212b-4269-91cb-cce45d6b9e7b,money: 1000000,money_hold:          0 , # created orders: 0, # open orders: 0}
