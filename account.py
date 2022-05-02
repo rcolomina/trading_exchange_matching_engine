@@ -39,14 +39,14 @@ class Account:
 
         self.movements = [] # logg of movements
 
-    def __repr__(selfs):
+    def __repr__(self):
         return "Account{money:"+str(self.money)+",money_hold:"+str(self.money_hold)+"}"
 
     def enough_money(self, price, volume):
         return self.money >= price * volume
 
     def enough_assets(self, ticker, volume):
-        asset_vol = self.assets.get(ticker)
+        asset_vol = self.assets_volume_hold.get(ticker)
         if asset_vol is not None:
             return asset_vol >= volume
         return False
