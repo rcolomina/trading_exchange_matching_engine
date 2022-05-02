@@ -73,7 +73,7 @@ class Trader:
             return order
         return None
 
-    def cancel_oder(self, order_id: Order) -> bool:
+    def cancel_order(self, order_id: Order) -> bool:
         for created_order in self.created_orders:
             if order_id == created_order.id:
                 self.created_orders.remove(created_order)

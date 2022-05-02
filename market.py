@@ -52,22 +52,19 @@ class Market:
                     return True
 
         length = len_buyers if order_buy else len_sellers
+        side_order = self.buyers if order_buy else self.sellers[::-1]
         index = 0
         while index < length:
-            side_order = self.buyers if order_buy else self.sellers[::-1]
             if order.price > side_order[index].price:
                 side_order.insert(index,order)
             index += 1
-            #    if order.price > self.buyers[index].price:
-            #        self.buyers.insert(index,order)
-            #        return True
-            #else:
-            #    if order.price < self.sellers[index].price:
-            #        self.sellers.insert(index,order)
-            #        return True
-            #index += 1
-        logger.warning("Problem inserting order")
-        return False
+        # Insert at the end and override reference with updated list
+        side_order.append(order)
+        if order_buy:
+            self.buyers = side_order
+        else:
+            self.sellers = side_order
+        return True
 
     def send_limit_order(self, order):
 

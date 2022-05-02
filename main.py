@@ -84,7 +84,7 @@ def test_scenario():
         logger.info("init order "+str(order))
         res = send_limit_order_and_update_trader(order, market, traders)
         if res is False:
-            logger.warning("Market order rejected or trader not found on order"+order.side)
+            logger.warning("Market order rejected or trader not found on order"+str(order.side))
 
 
     logger.info("Inserting new order")
