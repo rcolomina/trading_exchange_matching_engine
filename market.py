@@ -20,12 +20,13 @@ class Market:
 
         self.historical_traders = []
 
-    def _check_valid_order(self, order):
+    def _check_valid_order(self, order) -> bool:
         ticker_ok = order.ticker is self.ticker
         order_ok = order.side in [SideOrder.BUY, SideOrder.SELL]
         return ticker_ok and order_ok
 
-    def _insert_order(self, order):
+
+    def _insert_order(self, order) -> bool:
         '''
         Limit order
         :param order:
@@ -33,7 +34,7 @@ class Market:
         '''
         len_buyers = len(self.buyers)
         len_sellers = len(self.sellers)
-        order_buy = order.side == SideOrder.BUY
+        order_buy  = order.side == SideOrder.BUY
         order_sell = order.side == SideOrder.SELL
 
         void_book = len_buyers == 0 and len_sellers == 0
@@ -43,6 +44,7 @@ class Market:
             side_order.append(order)
             return True
 
+        # TODO: Check constraints on order simplified
         if order_buy and len_sellers > 0:
             if order.price > self.sellers[0].price:  # we cannot buy more expensive than the cheapest seller
                 logger.warning("Problem inserting buy order")
@@ -83,16 +85,16 @@ class Market:
             self.buyers.append(order)
         else:
             self.sellers.append(order)
+
         return True
 
-    def send_limit_order(self, incoming_order):
-
-        is_ok = self._check_valid_order(incoming_order)
-        if not is_ok:
+    def send_limit_order(self, incoming_order) -> bool:
+        is_ok_valdity = self._check_valid_order(incoming_order)
+        if not is_ok_valdity:
             return False
 
-        is_ok = self._insert_order(incoming_order)
-        if not is_ok:
+        is_ok_insertion = self._insert_order(incoming_order)
+        if not is_ok_insertion:
             return False
 
         return True
@@ -106,42 +108,11 @@ class Market:
         '''
         print("incoming order", incoming_order)
 
-        matched_orders = []
-
-        volume = incoming_order.volume
-        current_volume_remaining = volume
+        current_volume_remaining = incoming_order.volume
 
         print([(o.price, o.volume) for o in self.sellers])
-        if incoming_order.side == SideOrder.BUY:
-            while (current_volume_remaining > 0 and len(self.sellers) > 0):
-                top_order = self.sellers.pop(0) # take the first in the list
-                if top_order.volume <= current_volume_remaining:
-                    current_volume_remaining -= top_order.volume
-                    matched_orders.append(top_order)
-                else:
-                    # partial match
-                    remaining_volume_in_last_order = top_order.volume - current_volume_remaining
-                    print("remaining_volume_in_last_order", remaining_volume_in_last_order)
-                    order_to_the_top = Order(top_order.trader_id,
-                                             top_order.ticker,
-                                             top_order.side,
-                                             top_order.price,
-                                             remaining_volume_in_last_order)
 
-                    self._insert_order(order_to_the_top)
-                    print("order top", order_to_the_top)
-                    # create two order from the remaining one to be liquidated
-                    # one to put it back into the top
-                    remaining_order = Order(top_order.trader_id,
-                                            top_order.ticker,
-                                            top_order.side,
-                                            top_order.price,
-                                            current_volume_remaining)
-                    print("remaining order", remaining_order)
-                    matched_orders.append(remaining_order)
-                    # last_order = (top_order, current_volume_remaining)
-
-                    current_volume_remaining = 0
+        matched_orders = self._solve_orders(incoming_order,current_volume_remaining)
 
         print([(o.price, o.volume) for o in matched_orders])
 
@@ -153,16 +124,6 @@ class Market:
 
         return realize_trades
 
-    def _make_trade(self, market_order, limit_order):
-        trader_origin = market_order.id
-        trader_destiny = limit_order.id
-        ticker = market_order.ticker
-        order_type = market_order.side
-        price = limit_order.price
-        volume = limit_order.volume
-
-        return RealizedOrder(trader_origin, trader_destiny, ticker, order_type, price, volume)
-
     def cancel(self, order):
         if order.ticker is not self.ticker:
             logger.info("Warn: Incorrect Ticker")
@@ -172,6 +133,70 @@ class Market:
             # remove from list
         if order.side == SideOrder.SELL:
             pass
+
+
+
+    def _check_not_void_book(self,incoming_order):
+            if incoming_order.side == SideOrder.BUY:
+                return len(self.sellers) == 0
+            else:
+                return len(self.buyers) == 0
+
+
+    def _solve_orders(self,incoming_order,current_volume_remaining):
+        matched_orders = []
+
+        finish = self._check_not_void_book(incoming_order)
+        while (not finish):
+            finish = current_volume_remaining <= 0
+            top_order = None
+            if incoming_order.side == SideOrder.BUY:
+                top_order = self.sellers.pop(0) # take the first in the list
+            else:
+                top_order = self.buyers.pop(0)
+
+            if top_order.volume <= current_volume_remaining:
+                current_volume_remaining -= top_order.volume
+                matched_orders.append(top_order)
+            else:
+                # partial match
+                remaining_volume_in_last_order = top_order.volume - current_volume_remaining
+                print("remaining_volume_in_last_order", remaining_volume_in_last_order)
+                order_to_the_top = Order(top_order.trader_id,
+                                         top_order.ticker,
+                                         top_order.side,
+                                         top_order.price,
+                                         remaining_volume_in_last_order)
+
+                self._insert_order(order_to_the_top)
+                print("order top", order_to_the_top)
+                # create two order from the remaining one to be liquidated
+                # one to put it back into the top
+                remaining_order = Order(top_order.trader_id,
+                                        top_order.ticker,
+                                        top_order.side,
+                                        top_order.price,
+                                        current_volume_remaining)
+                print("remaining order", remaining_order)
+                matched_orders.append(remaining_order)
+                # last_order = (top_order, current_volume_remaining)
+
+                current_volume_remaining = 0
+
+            # check that we can continue
+            if not finish:
+                finish = self._check_not_void_book(incoming_order)
+        return matched_orders
+
+    def _make_trade(self, market_order, limit_order):
+        trader_origin = market_order.id
+        trader_destiny = limit_order.id
+        ticker = market_order.ticker
+        order_type = market_order.side
+        price = limit_order.price
+        volume = limit_order.volume
+
+        return RealizedOrder(trader_origin, trader_destiny, ticker, order_type, price, volume)
 
     def _update_orders(self, current_orders):
         map_prices_to_pairs_n_orders_volume = {}

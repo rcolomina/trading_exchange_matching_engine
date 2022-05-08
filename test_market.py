@@ -64,5 +64,24 @@ class MarketTest(unittest.TestCase):
 
         print(self.market)
 
+
+    def test_send_market_order_sell(self):
+
+        for o in self.orders:
+            ret = self.market.send_limit_order(o)
+            self.assertTrue(ret)
+        print(self.market)
+
+        trader_id = "attacker"
+        my_market_order = Order(trader_id, self.ticker, SideOrder.SELL, None, 200)
+
+        realized_trades = self.market.send_market_order(my_market_order)
+
+        for realized_order in realized_trades:
+            print(realized_order)
+
+        print(self.market)
+
+
 if __name__ == '__main__':
     unittest.main()
