@@ -41,7 +41,7 @@ class Trader:
     def observe(self, market):
 
         self.first_seller = market.sellers[0]  # TODO: replace by getter checking length
-        self.first_buyer  = market.buyer[0]  # TODO: replace by getter checking length
+        self.first_buyer  = market.buyer[0]    # TODO: replace by getter checking length
 
     def take_action(self):
         self.observe()
@@ -50,6 +50,8 @@ class Trader:
     def create_order(self, ticker: str, side: SideOrder, price: float, volume: float) -> Order:
         logger.info("Creating order for ticker " + ticker)
         # print("Creating order for ticker",ticker,"side",side,"price",price,"volume",volume)
+
+        # TODO: Check money to buy, and check assets to sell
         if self.account.enough_money(price, volume):
 
             if side is SideOrder.BUY:
@@ -64,13 +66,14 @@ class Trader:
                     logger.warning("Not enough assets to create sell order")
                     return None
 
-            # order can be created
+            # at this point the order can be created
             order = Order(self.id, ticker, side, price, volume)
 
             # create the order
             self.created_orders.append(order)
             # print("created order",order)
             return order
+        logger.warning("Not enough money")
         return None
 
     def cancel_order(self, order_id: Order) -> bool:
