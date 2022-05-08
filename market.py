@@ -2,7 +2,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-from order import SideOrder
+from order import SideOrder, RealizedOrder
 from order import Order
 
 
@@ -104,34 +104,32 @@ class Market:
         :param order:
         :return:
         '''
-        print("incoming order",incoming_order)
+        print("incoming order", incoming_order)
 
         matched_orders = []
 
         volume = incoming_order.volume
         current_volume_remaining = volume
 
-        print([(o.price,o.volume) for o in self.sellers])
+        print([(o.price, o.volume) for o in self.sellers])
         if incoming_order.side == SideOrder.BUY:
             while (current_volume_remaining > 0 and len(self.sellers) > 0):
-                top_order = self.sellers[0]
-
+                top_order = self.sellers.pop(0) # take the first in the list
                 if top_order.volume <= current_volume_remaining:
                     current_volume_remaining -= top_order.volume
                     matched_orders.append(top_order)
-                    self.sellers.pop(0)
                 else:
                     # partial match
                     remaining_volume_in_last_order = top_order.volume - current_volume_remaining
-
                     print("remaining_volume_in_last_order", remaining_volume_in_last_order)
-
                     order_to_the_top = Order(top_order.trader_id,
                                              top_order.ticker,
                                              top_order.side,
                                              top_order.price,
                                              remaining_volume_in_last_order)
-                    print("order top",order_to_the_top)
+
+                    self._insert_order(order_to_the_top)
+                    print("order top", order_to_the_top)
                     # create two order from the remaining one to be liquidated
                     # one to put it back into the top
                     remaining_order = Order(top_order.trader_id,
@@ -139,23 +137,31 @@ class Market:
                                             top_order.side,
                                             top_order.price,
                                             current_volume_remaining)
-                    print("remaining order",remaining_order)
+                    print("remaining order", remaining_order)
                     matched_orders.append(remaining_order)
                     # last_order = (top_order, current_volume_remaining)
 
                     current_volume_remaining = 0
-                    # TODO: Last order is not popped by modified
-                    # top_order.
-                    # self.id = uuid.uuid4()
 
-            # self.trader_id = trader_id
-            # self.ticker = ticker
-            # self.side = side
-            # self.price = price
-            # self.volume = volume
-        print([(o.price,o.volume) for o in matched_orders])
-        # TODO: send orders that matches with the incoming_order
-        return matched_orders
+        print([(o.price, o.volume) for o in matched_orders])
+
+        realize_trades = []
+        for o in matched_orders:
+            print("matching orders")
+            realize_trade = self._make_trade(incoming_order, o)
+            realize_trades.append(realize_trade)
+
+        return realize_trades
+
+    def _make_trade(self, market_order, limit_order):
+        trader_origin = market_order.id
+        trader_destiny = limit_order.id
+        ticker = market_order.ticker
+        order_type = market_order.side
+        price = limit_order.price
+        volume = limit_order.volume
+
+        return RealizedOrder(trader_origin, trader_destiny, ticker, order_type, price, volume)
 
     def cancel(self, order):
         if order.ticker is not self.ticker:

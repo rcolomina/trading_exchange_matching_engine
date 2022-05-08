@@ -14,7 +14,7 @@ class MarketTest(unittest.TestCase):
         ticker = self.ticker
 
         # Simulate Buy Ordersorder
-        trader_id = "asdf"
+        trader_id = "jessy"
         side = SideOrder.BUY
         list_init_orders = [(123,1000),(121,5000),(123,100),(124,150),(122.5,1234)]
         for p in list_init_orders:
@@ -22,7 +22,7 @@ class MarketTest(unittest.TestCase):
 
 
         # Simulate order
-        trader_id = "asdfasdf3e"
+        trader_id = "larry"
         side = SideOrder.SELL
 
         self.orders.append(Order(trader_id, ticker, side, price=151, volume=5000))
@@ -56,12 +56,13 @@ class MarketTest(unittest.TestCase):
 
         trader_id = "attacker"
         my_market_order = Order(trader_id, self.ticker, SideOrder.BUY, None, 3000)
-        #print(my_market_order)
-        self.market.send_market_order(my_market_order)
-        #print(self.market)
-        # print(orders)
-        # print(last_order)
 
+        realized_trades = self.market.send_market_order(my_market_order)
+
+        for realized_order in realized_trades:
+            print(realized_order)
+
+        print(self.market)
 
 if __name__ == '__main__':
     unittest.main()
