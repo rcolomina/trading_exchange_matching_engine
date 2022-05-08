@@ -5,50 +5,62 @@ from market import Market
 
 
 class MarketTest(unittest.TestCase):
-    def test_send_limit_order(self):
-        #self.assertEqual(True, False)  # add assertion here
 
+    def setUp(self) -> None:
         print("\n")
+        self.orders = []
 
-        # Simulate order
+        self.ticker = "test"
+        ticker = self.ticker
+
+        # Simulate Buy Ordersorder
         trader_id = "asdf"
-        ticker = "test"
         side = SideOrder.BUY
-        price = 123
-        volume = 1000
+        list_init_orders = [(123,1000),(121,5000),(123,100),(124,150),(122.5,1234)]
+        for p in list_init_orders:
+            self.orders.append(Order(trader_id, ticker, side, price=p[0], volume=p[1]))
 
-        order0 = Order(trader_id,ticker,side,price,volume)
-        print(order0)
-
-        price = 121
-        volume = 5000
-        order1 = Order(trader_id,ticker,side,price,volume)
-        print(order1)
 
         # Simulate order
         trader_id = "asdfasdf3e"
-        ticker = "test"
         side = SideOrder.SELL
-        price = 150
-        volume = 5000
 
-        order2 = Order(trader_id,ticker,side,price,volume)
-        print(order2)
+        self.orders.append(Order(trader_id, ticker, side, price=151, volume=5000))
+        self.orders.append(Order(trader_id, ticker, side, price=150, volume=10000))
+        self.orders.append(Order(trader_id, ticker, side, price=155, volume=100))
+        self.orders.append(Order(trader_id, ticker, side, price=160, volume=200))
+        self.orders.append(Order(trader_id, ticker, side, price=149, volume=250))
+        self.orders.append(Order(trader_id, ticker, side, price=149, volume=250))
+        self.orders.append(Order(trader_id, ticker, side, price=149.01, volume=250))
 
-        price = 151
-        order3 = Order(trader_id,ticker,side,price,volume)
-        print(order3)
 
-        orders = [order1,order0,order2,order3]
+        self.market = Market(ticker)
 
+    def test_send_limit_order(self):
+        # self.assertEqual(True, False)  # add assertion here
         # create market with ticker
-        market = Market(ticker)
 
-        for o in orders:
-            ret = market.send_limit_order(o)
-            assert ret==True
-            print(market)
+        for o in self.orders:
+            ret = self.market.send_limit_order(o)
+            self.assertTrue(ret)
+            #print(self.market)
+        #print([(o.price,o.volume) for o in self.market.sellers])
+        #print([(o.price,o.volume) for o in self.market.buyers])
 
+    def test_send_market_order(self):
+
+        for o in self.orders:
+            ret = self.market.send_limit_order(o)
+            self.assertTrue(ret)
+        print(self.market)
+
+        trader_id = "attacker"
+        my_market_order = Order(trader_id, self.ticker, SideOrder.BUY, None, 3000)
+        #print(my_market_order)
+        self.market.send_market_order(my_market_order)
+        #print(self.market)
+        # print(orders)
+        # print(last_order)
 
 
 if __name__ == '__main__':
