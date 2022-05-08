@@ -2,10 +2,15 @@ import uuid
 
 from enum import Enum, unique
 
+
 @unique
 class SideOrder(Enum):
     BUY = "buy"
     SELL = "sell"
+
+
+class MarketOrder:
+    pass
 
 
 class Order:
@@ -26,5 +31,9 @@ class Order:
               + str(self.ticker) \
               + ",side: " \
               + str(self.side) \
-              + ",price: " + str(self.price) + "}"
+              + ",price: " \
+              + str(self.price) \
+              + ",volume: " \
+              + str(self.volume) \
+              + "}"
         return msg

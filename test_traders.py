@@ -30,9 +30,10 @@ class TradersTest(unittest.TestCase):
         self.assertEqual(t1.account.money_hold, 10*100 + 9*200 + 9*500)
 
         # Initial Sell orders
-        #s1 = t2.create_order(ticker, SideOrder.SELL, 12, 300)
+        s1 = t2.create_order(ticker, SideOrder.SELL, 12, 300)
         #s2 = t2.create_order(ticker, SideOrder.SELL, 13, 500)
 
+        print(s1)
         #self.assertEqual(s1.ticker, ticker)
         #self.assertEqual(s1.side, SideOrder.SELL)
         #self.assertEqual(b1.trader_id, t1.id)
