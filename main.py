@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 def process_create_order_or_cancel(reply_from_market_on_create_order: bool,
                                    market: Market,
                                    trader: Trader) -> bool:
+
     if reply_from_market_on_create_order is not None:
         res = market.send_limit_order(reply_from_market_on_create_order)
         if res:  # limit order send ok
@@ -17,8 +18,9 @@ def process_create_order_or_cancel(reply_from_market_on_create_order: bool,
             if not order_open_ok:
                 logger.warning("Open order was failed")
                 return False
-            logger.info("Order created in the market Ok")
-            return True
+            else:
+                logger.info("Order created in the market Ok")
+                return True
         else:  # order rejected so cancel
             order_cancel_ok = trader.cancel_order(reply_from_market_on_create_order)
             if not order_cancel_ok:
