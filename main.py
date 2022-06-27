@@ -109,9 +109,9 @@ def similation():
 
         t1.obs(m1)
         t1.a
-        t1.create_order(Oo)
-        print(m1)
-        print(m2)
+        #t1.create_order(Oo)
+        #print(m1)
+        #print(m2)
 
 
 def main():
