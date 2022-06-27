@@ -100,7 +100,19 @@ def test_scenario():
 
 
 def similation():
-    pass
+    while(1):
+
+        t1 = Trader()
+        t2 = Trader()
+        m1 = Market()
+        m2 = Market()
+
+        t1.obs(m1)
+        t1.a
+        t1.create_order(Oo)
+        print(m1)
+        print(m2)
+
 
 def main():
     logger.info("Start Main")
