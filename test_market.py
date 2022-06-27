@@ -20,13 +20,18 @@ class MarketTest(unittest.TestCase):
         for p in list_init_orders:
             self.orders.append(Order(trader_id, ticker, side, price=p[0], volume=p[1]))
 
+        o3 = Order(trader_id, ticker, SideOrder.BUY, price=100, volume=4000)
+        o4 = Order(trader_id, ticker, SideOrder.BUY, price=120, volume=5000)
 
-        # Simulate order
+
+    # Simulate order
         trader_id = "larry"
         side = SideOrder.SELL
 
-        self.orders.append(Order(trader_id, ticker, side, price=151, volume=5000))
-        self.orders.append(Order(trader_id, ticker, side, price=150, volume=10000))
+        o1 = Order(trader_id, ticker, side, price=150, volume=10000)
+        self.orders.append(o1)
+        o2 = Order(trader_id, ticker, side, price=158, volume=20000)
+        self.orders.append(o2)
         self.orders.append(Order(trader_id, ticker, side, price=155, volume=100))
         self.orders.append(Order(trader_id, ticker, side, price=160, volume=200))
         self.orders.append(Order(trader_id, ticker, side, price=149, volume=250))
@@ -36,6 +41,19 @@ class MarketTest(unittest.TestCase):
 
         self.market = Market(ticker)
 
+        self.orders_small = [o1,o2,o3,o4]
+
+    def test_send_limit_order_simple(self):
+        for o in self.orders_small:
+            ret = self.market.send_limit_order(o)
+            #self.assertTrue(ret)
+            print(self.market)
+
+        trader_id = "asdf"
+        market_order = Order(trader_id, self.ticker,SideOrder.BUY, None, volume=1000)
+        self.market.send_market_order(market_order)
+        print(self.market)
+
     def test_send_limit_order(self):
         # self.assertEqual(True, False)  # add assertion here
         # create market with ticker
@@ -43,7 +61,7 @@ class MarketTest(unittest.TestCase):
         for o in self.orders:
             ret = self.market.send_limit_order(o)
             self.assertTrue(ret)
-            #print(self.market)
+            print(self.market)
         #print([(o.price,o.volume) for o in self.market.sellers])
         #print([(o.price,o.volume) for o in self.market.buyers])
 
